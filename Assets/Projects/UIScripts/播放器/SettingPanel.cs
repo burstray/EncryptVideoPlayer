@@ -447,6 +447,11 @@ public class SettingPanel : BasePanel
         {
             Application.Quit();
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+
+        }
     }
 
     /// <summary>

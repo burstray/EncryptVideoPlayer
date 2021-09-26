@@ -14,7 +14,10 @@ public class DisplayPanel : BasePanel
     private List<string> PlayPath = new List<string>();
     private VideoData videoData;
     private int playIndex;
+    private int PlayCount;
     private string savePath;
+
+    private string SaveA,SaveB;
 
     protected override void Awake()
     {
@@ -23,6 +26,9 @@ public class DisplayPanel : BasePanel
         {
             videoData = Config.Instance.configData.videoData;
         }
+
+        SaveA = Application.persistentDataPath + "/" + "a.dll";
+        SaveB = Application.persistentDataPath + "/" + "b.dll";
     }
 
     public override void InitFind()
@@ -111,6 +117,7 @@ public class DisplayPanel : BasePanel
     {
         string path = Application.streamingAssetsPath + "/EncryptVideo/" + PlayPath[playIndex] + ".ery";
         playIndex = (playIndex + 1) % PlayPath.Count;
+        PlayCount++;
         //using (var fileStream = new MyStream(path, FileMode.Open, FileAccess.Read, FileShare.None, 1024 * 4, false))
         //{
         //    var bytes = new byte[fileStream.Length];
@@ -124,13 +131,17 @@ public class DisplayPanel : BasePanel
         fsRead.Dispose();
 
         //将解密的数据保存到系统缓存文件
-        savePath = Application.persistentDataPath + "/" + "c0.dll";
-        if (File.Exists(savePath))
+        if(PlayCount % 2 == 0)
         {
-            File.Delete(savePath);
+            savePath = SaveA;
+        }
+        else
+        {
+            savePath = SaveB;
         }
 
         FileStream fs = new FileStream(savePath, FileMode.Create);
+
         using (BinaryWriter w = new BinaryWriter(fs))
         {
             w.Write(readRaws);
@@ -148,5 +159,19 @@ public class DisplayPanel : BasePanel
         mediaPlayer.Events.RemoveAllListeners();
         StopAllCoroutines();
         playIndex = 0;
+        PlayCount = 0;
+    }
+
+    private void OnApplicationQuit()
+    {
+        if(File.Exists(SaveA))
+        {
+            File.Delete(SaveA);
+        }
+
+        if (File.Exists(SaveB))
+        {
+            File.Delete(SaveB);
+        }
     }
 }
