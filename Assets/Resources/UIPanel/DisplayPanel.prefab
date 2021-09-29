@@ -29,7 +29,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3454447154985831009}
+  - {fileID: 3229573798251189377}
   m_Father: {fileID: 596236230295031239}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,216 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7314835792331255755
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3454447154985831009}
-  - component: {fileID: 7915540495812228774}
-  - component: {fileID: 7711972512040176311}
-  - component: {fileID: 7552951888571393949}
-  m_Layer: 5
-  m_Name: VideoPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3454447154985831009
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7314835792331255755}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8031194476119631354}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7915540495812228774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7314835792331255755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 638c870cac4da414fba921606d504407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_VideoLocation: 2
-  m_VideoPath: 
-  m_AutoOpen: 0
-  m_AutoStart: 0
-  m_Loop: 1
-  m_Volume: 1
-  m_Balance: 0
-  m_Muted: 0
-  m_PlaybackRate: 1
-  m_Resample: 0
-  m_ResampleMode: 0
-  m_ResampleBufferSize: 5
-  m_Persistent: 0
-  m_videoMapping: 0
-  m_StereoPacking: 0
-  m_AlphaPacking: 0
-  m_DisplayDebugStereoColorTint: 0
-  m_FilterMode: 1
-  m_WrapMode: 1
-  m_AnisoLevel: 0
-  m_LoadSubtitles: 0
-  m_SubtitleLocation: 2
-  m_SubtitlePath: 
-  m_AudioHeadTransform: {fileID: 0}
-  m_AudioFocusEnabled: 0
-  m_AudioFocusTransform: {fileID: 0}
-  m_AudioFocusWidthDegrees: 90
-  m_AudioFocusOffLevelDB: 0
-  m_events:
-    m_PersistentCalls:
-      m_Calls: []
-  m_eventMask: -1
-  m_forceFileFormat: 0
-  _pauseMediaOnAppPause: 1
-  _playMediaOnAppUnpause: 1
-  m_sourceSampleRate: 0
-  m_sourceChannels: 0
-  m_manuallySetAudioSourceProperties: 0
-  _optionsWindows:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    videoApi: 1
-    useHardwareDecoding: 1
-    useUnityAudio: 0
-    forceAudioResample: 1
-    useTextureMips: 0
-    hintAlphaChannel: 0
-    useLowLatency: 0
-    forceAudioOutputDeviceName: 
-    preferredFilters: []
-    enableAudio360: 0
-    audio360ChannelMode: 0
-  _optionsMacOSX:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    audioMode: 0
-    httpHeaders: []
-    httpHeaderJson: 
-    keyServerURLOverride: 
-    keyServerAuthToken: 
-    base64EncodedKeyBlob: 
-  _optionsIOS:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    audioMode: 0
-    httpHeaders: []
-    httpHeaderJson: 
-    keyServerURLOverride: 
-    keyServerAuthToken: 
-    base64EncodedKeyBlob: 
-    useYpCbCr420Textures: 1
-    resumePlaybackOnAudioSessionRouteChange: 0
-  _optionsTVOS:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    audioMode: 0
-    httpHeaders: []
-    httpHeaderJson: 
-    keyServerURLOverride: 
-    keyServerAuthToken: 
-    base64EncodedKeyBlob: 
-    useYpCbCr420Textures: 1
-    resumePlaybackOnAudioSessionRouteChange: 0
-  _optionsAndroid:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    videoApi: 2
-    useFastOesPath: 0
-    showPosterFrame: 0
-    enableAudio360: 0
-    audio360ChannelMode: 0
-    preferSoftwareDecoder: 0
-    httpHeaders: []
-    httpHeaderJson: 
-    fileOffset: 0
-  _optionsWindowsPhone:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    useHardwareDecoding: 1
-    useUnityAudio: 0
-    forceAudioResample: 1
-    useTextureMips: 0
-    useLowLatency: 0
-  _optionsWindowsUWP:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    useHardwareDecoding: 1
-    useUnityAudio: 0
-    forceAudioResample: 1
-    useTextureMips: 0
-    useLowLatency: 0
-  _optionsWebGL:
-    overridePath: 0
-    pathLocation: 2
-    path: 
-    externalLibrary: 0
-    useTextureMips: 0
-  _optionsPS4:
-    overridePath: 0
-    pathLocation: 2
-    path: 
---- !u!114 &7711972512040176311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7314835792331255755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f3b319d2d69934d8bf545ab45c918d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mediaPlayer: {fileID: 7915540495812228774}
-  _displayInEditor: 0
-  _scaleMode: 2
-  _color: {r: 1, g: 1, b: 1, a: 1}
-  _alphaBlend: 0
-  _useDepth: 0
-  _depth: 0
-  _fullScreen: 1
-  _x: 0
-  _y: 0
-  _width: 1
-  _height: 1
---- !u!222 &7552951888571393949
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7314835792331255755}
-  m_CullTransparentMesh: 0
 --- !u!1 &8368859423471335565
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,5 +136,172 @@ MonoBehaviour:
   openTweenTime: 0.5
   hideTweenTime: 0.5
   IsOpen: 1
-  mediaPlayer: {fileID: 7915540495812228774}
-  displayIMGUI: {fileID: 7711972512040176311}
+  mediaPlayer: {fileID: 3435131229460933347}
+  playIndex: 0
+--- !u!1001 &32237106263735749
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8031194476119631354}
+    m_Modifications:
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449351444513232678, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_VideoPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449351444513232678, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449351444513232678, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_AutoStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449351444513232678, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449351444513232678, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_VideoLocation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631284365673961807, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_Name
+      value: MediaPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631284365673961807, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca5636ff0583bdf48bed14d07a3a4d19, type: 3}
+--- !u!224 &3229573798251189377 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3216492865249372484, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 32237106263735749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3435131229460933347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3449351444513232678, guid: ca5636ff0583bdf48bed14d07a3a4d19,
+    type: 3}
+  m_PrefabInstance: {fileID: 32237106263735749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638c870cac4da414fba921606d504407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

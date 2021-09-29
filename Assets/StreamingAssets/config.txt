@@ -1,1 +1,1 @@
-{"isCursor":true,"isOpenPrepose":false,"videoData":{"playVideoDic":{"AlphaLeftRight":true,"AlphaTopBottom":false,"BigBuckBunny_360p30":false,"BigBuckBunny_720p30":false,"SampleCube":false,"SampleSphere":false,"光伏发电场（无水印）-9.1":false,"积木列车demo":false,"Sample180":false,"d2-云南石林-正稿":false,"d2-大丰-正稿":false,"d2-河南汤阴-正稿":false,"d2-清风湖-正稿":false,"d2-金子岭-正稿":false,"d2-高力板-正稿":false},"ScreenX":1920,"ScreenY":1080,"PlayMode":1,"SwitchTime":6}}
+{"isCursor":true,"isOpenPrepose":false,"videoData":{"playVideoDic":{},"ScreenX":1920,"ScreenY":1080,"SwitchTime":6}}

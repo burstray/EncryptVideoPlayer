@@ -158,7 +158,7 @@ public class FileHandle
     public List<string> GetVideoPath(string path)
     {
         List<string> filePaths = new List<string>();
-        string[] dirs = Directory.GetFiles(path, "*.ery");
+        string[] dirs = Directory.GetFiles(path, "*" + Config.FileSuffix);
         for (int j = 0; j < dirs.Length; j++)
         {
             filePaths.Add(Path.GetFileNameWithoutExtension(dirs[j]));

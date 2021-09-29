@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class SetButton : MonoBehaviour
 {
     public Text text;
-    public Image image;
+    //public Image image;
     public Button SelfBtn;
 
     private void Awake()
     {
         text = FindTool.FindChildComponent<Text>(transform,"Text");
-        image = GetComponent<Image>();
+        //image = GetComponent<Image>();
         SelfBtn = GetComponent<Button>();
     }
 
@@ -21,13 +21,13 @@ public class SetButton : MonoBehaviour
     {
         SelfBtn.onClick.AddListener(() =>
         {
-            if(image.color == Color.red)
+            if(text.color == Color.red)
             {
-                image.color = Color.white;
+                text.color = Color.white;
             }
             else
             {
-                image.color = Color.red;
+                text.color = Color.red;
             }
             UIManager.GetPanel<SettingPanel>(WindowTypeEnum.ForegroundScreen).JudeReadPlayPath(text.text);
         });
@@ -38,11 +38,11 @@ public class SetButton : MonoBehaviour
         text.text = st;
         if(color)
         {
-            image.color = Color.red;
+            text.color = Color.red;
         }
         else
         {
-            image.color = Color.white;
+            text.color = Color.white;
         }
     }
 }

@@ -45,7 +45,7 @@ public class Main : MonoBehaviour
         if(Config.Instance)
         {
             Cursor.visible = Config.Instance.configData.isCursor;
-            Screen.SetResolution( Config.Instance.configData.videoData.ScreenX, Config.Instance.configData.videoData.ScreenY,true);
+            //Screen.SetResolution( Config.Instance.configData.videoData.ScreenX, Config.Instance.configData.videoData.ScreenY,true);
         }
 #endif
 

@@ -10,11 +10,11 @@ using System;
 public class SettingPanel : BasePanel
 {
     public Button SelectAllBtn,ClearAllBtn,StartBtn,PasswordBtn;
-    public Dropdown Dropdown;
-    public InputField InputField_X,InputField_Y,SwtichTimeInputField,PasswordInputField;
+    //public Dropdown Dropdown;
+    public InputField InputField_X,InputField_Y, SwtichTimeInputField, PasswordInputField;
     public Text Msg;
     public ScrollRect LeftScroll,RightScroll;
-    public CanvasGroup SwitchTimeCanvas,SetResolution,PasswordCanvas;
+    public CanvasGroup /*SwitchTimeCanvas,*/SetResolution,PasswordCanvas;
 
     //设置页面数据
     public VideoData videoData;
@@ -30,26 +30,19 @@ public class SettingPanel : BasePanel
         base.Start();
         if (Config.Instance)
         {
-            if (Config.Instance.configData.videoData != null)
-            {
-                videoData = Config.Instance.configData.videoData;
-                Init();
-            }
-            else
-            {
-                Config.Instance.configData.videoData = new VideoData();
-                videoData = Config.Instance.configData.videoData;
-                videoData.playVideoDic = new Dictionary<string, bool>();
-                Dropdown.value = 0;
-                SwitchTimeCanvas.Hide();
-                InputField_X.text = Screen.width.ToString();
-                InputField_Y.text = Screen.height.ToString();
-                SwtichTimeInputField.text = "6";
-            }
+            videoData = Config.Instance.configData.videoData;
+            Init();
+            OnStartBtn();
         }
 
         SetResolution.Hide();
         PasswordCanvas.Hide();
+        Msg.text = "";
+        //if(videoData.PlayMode == 0)
+        //{
+        //    OnStartBtn();
+        //}
+        
     }
 
     /// <summary>
@@ -57,40 +50,46 @@ public class SettingPanel : BasePanel
     /// </summary>
     private void Init()
     {
-        switch (videoData.PlayMode)
-        {
-            case 0:
-                Dropdown.value = 0;
-                SwitchTimeCanvas.Hide();
-                break;
-            case 1:
-                Dropdown.value = 1;
-                SwitchTimeCanvas.Open();
-                break;
-            default:
-                break;
-        }
+        //switch (videoData.PlayMode)
+        //{
+        //    case 0:
+        //        Dropdown.value = 0;
+        //        SwitchTimeCanvas.Hide();
+        //        break;
+        //    case 1:
+        //        Dropdown.value = 1;
+        //        SwitchTimeCanvas.Open();
+        //        break;
+        //    default:
+        //        break;
+        //}
 
         InputField_X.text = videoData.ScreenX.ToString();
         InputField_Y.text = videoData.ScreenY.ToString();
         SwtichTimeInputField.text = videoData.SwitchTime.ToString();
 
         List<string> VideoList = Config.Instance.EncryptVideoPath;
-
-        for (int i = 0; i < VideoList.Count; i++)
+        if(VideoList.Count == 0)
         {
-            if(videoData.playVideoDic.ContainsKey(VideoList[i]))
+            videoData.playVideoDic.Clear();
+        }
+        else
+        {
+            for (int i = 0; i < VideoList.Count; i++)
             {
-                CreatButton(VideoList[i],videoData.playVideoDic[VideoList[i]]);
-                if(videoData.playVideoDic[VideoList[i]])
+                if (videoData.playVideoDic.ContainsKey(VideoList[i]))
                 {
-                    CreatText(VideoList[i]);
+                    CreatButton(VideoList[i], videoData.playVideoDic[VideoList[i]]);
+                    if (videoData.playVideoDic[VideoList[i]])
+                    {
+                        CreatText(VideoList[i]);
+                    }
                 }
-            }
-            else
-            {
-                CreatButton(VideoList[i],false);
-                videoData.playVideoDic.Add(VideoList[i],false);
+                else
+                {
+                    CreatButton(VideoList[i], false);
+                    videoData.playVideoDic.Add(VideoList[i], false);
+                }
             }
         }
     }
@@ -104,7 +103,7 @@ public class SettingPanel : BasePanel
         StartBtn = FindTool.FindChildComponent<Button>(transform,"StartBtn");
         PasswordBtn = FindTool.FindChildComponent<Button>(transform,"Password/bg/CloseBtn");
 
-        Dropdown = FindTool.FindChildComponent<Dropdown>(transform,"PlayMode/Dropdown");
+        //Dropdown = FindTool.FindChildComponent<Dropdown>(transform,"PlayMode/Dropdown");
 
         InputField_X = FindTool.FindChildComponent<InputField>(transform,"Resolution/X/InputField");
         InputField_Y = FindTool.FindChildComponent<InputField>(transform,"Resolution/Y/InputField");
@@ -116,7 +115,7 @@ public class SettingPanel : BasePanel
         LeftScroll = FindTool.FindChildComponent<ScrollRect>(transform,"LeftHint/Scroll View");
         RightScroll = FindTool.FindChildComponent<ScrollRect>(transform,"CentralHint/Scroll View");
 
-        SwitchTimeCanvas = FindTool.FindChildComponent<CanvasGroup>(transform,"PlayMode/SwtichTime");
+        //SwitchTimeCanvas = FindTool.FindChildComponent<CanvasGroup>(transform,"PlayMode/SwtichTime");
         SetResolution = FindTool.FindChildComponent<CanvasGroup>(transform,"Resolution");
         PasswordCanvas = FindTool.FindChildComponent<CanvasGroup>(transform,"Password");
     }
@@ -124,7 +123,7 @@ public class SettingPanel : BasePanel
     public override void InitEvent()
     {
         base.InitEvent();
-        Dropdown.onValueChanged.AddListener(OnModeChange);
+        //Dropdown.onValueChanged.AddListener(OnModeChange);
 
         SelectAllBtn.onClick.AddListener(OnSelectAllBtn);
         ClearAllBtn.onClick.AddListener(OnClearAllBtn);
@@ -138,6 +137,12 @@ public class SettingPanel : BasePanel
         PasswordInputField.onValueChanged.AddListener(ValueChangePassword);
     }
 
+    public override void Open()
+    {
+        base.Open();
+        SetBtnAndTextScale();     
+    }
+
     /// <summary>
     /// 生成按钮
     /// </summary>
@@ -147,8 +152,9 @@ public class SettingPanel : BasePanel
     {
         if (!BtnDic.ContainsKey(st))
         {
-            GameObject button = Instantiate(PoolManager.Instance.ButtonPrefabs); //PoolManager.Instance.GetPool(MTFrame.MTPool.PoolType.Button);
+            GameObject button = PoolManager.Instance.GetPool(MTFrame.MTPool.PoolType.Button);
             button.transform.SetParent(LeftScroll.content);
+            button.transform.localScale = Vector3.one;
             button.transform.SetAsLastSibling();
             button.GetComponent<SetButton>().Init(st, color);
             BtnDic.Add(st, button);
@@ -197,8 +203,9 @@ public class SettingPanel : BasePanel
             GameObject Temp = Instantiate(PoolManager.Instance.TextPrefabs); 
             //PoolManager.Instance.GetPool(MTFrame.MTPool.PoolType.Text);
             Temp.transform.SetParent(RightScroll.content);
+            Temp.transform.localScale = Vector3.one;
             Temp.transform.SetAsLastSibling();
-            Temp.GetComponent<Text>().text = st;
+            Temp.transform.GetChild(0).GetComponent<Text>().text = st;
             TextDic.Add(st, Temp);
         }
     }
@@ -222,13 +229,22 @@ public class SettingPanel : BasePanel
         {
             return;
         }
-
-        int temp = int.Parse(arg0.Trim());
-        if(temp == 0)
+        int temp;
+        try
         {
-            SwtichTimeInputField.text = "6";
-            videoData.SwitchTime = 6;
-            Msg.text = "间隔时间不能为0！";
+            temp = int.Parse(arg0.Trim());
+        }
+        catch
+        {
+            SwtichTimeInputField.text = videoData.SwitchTime.ToString();
+            Msg.text = "时间只能是数字！";
+            return;
+        }
+
+        if (temp <= 0)
+        {
+            SwtichTimeInputField.text = videoData.SwitchTime.ToString();
+            Msg.text = "间隔时间不能小于1秒！";
             return;
         }
 
@@ -242,10 +258,21 @@ public class SettingPanel : BasePanel
             return;
         }
 
-        int temp = int.Parse(arg0.Trim());
-        if(temp == 0)
+        int temp;
+        try
         {
-            Msg.text = "分辨率Y不能为0！";
+            temp = int.Parse(arg0.Trim());
+        }
+        catch
+        {
+            InputField_Y.text = videoData.ScreenY.ToString();
+            Msg.text = "分辨率Y只能是数字！";
+            return;
+        }
+
+        if (temp <= 0)
+        {
+            Msg.text = "分辨率Y不能小于0！";
             InputField_Y.text = videoData.ScreenY.ToString();
         }
         else
@@ -261,10 +288,22 @@ public class SettingPanel : BasePanel
             return;
         }
 
-        int temp = int.Parse(arg0.Trim());
-        if(temp == 0)
+        int temp;
+        try
         {
-            Msg.text = "分辨率X不能为0！";
+            temp = int.Parse(arg0.Trim());
+        }
+        catch
+        {
+            //temp = videoData.SwitchTime;
+            InputField_X.text = videoData.ScreenX.ToString();
+            Msg.text = "分辨率X只能是数字！";
+            return;
+        }
+
+        if (temp <= 0)
+        {
+            Msg.text = "分辨率X不能小于0！";
             InputField_X.text = videoData.ScreenX.ToString();
         }
         else
@@ -359,7 +398,7 @@ public class SettingPanel : BasePanel
             }
         }
 
-        if (Dropdown.value ==1 && string.IsNullOrEmpty(SwtichTimeInputField.text))
+        if (string.IsNullOrEmpty(SwtichTimeInputField.text))
         {
             Msg.text = "切换时间不能为空!";
             return;
@@ -377,7 +416,7 @@ public class SettingPanel : BasePanel
             for (int i = 0; i < texts.Length; i++)
             {
                 ReadPlayPath.Add(texts[i].text);
-                string path = Application.streamingAssetsPath + "/EncryptVideo/"+ texts[i].text + ".ery";
+                string path = Application.streamingAssetsPath + "/" + Config.VideoFoldName +"/"+ texts[i].text + Config.FileSuffix;
                 if(!FileHandle.Instance.IsExistFile(path))
                 {
                     Msg.text = "文件丢失!请将--[" + texts[i].text + "]--从播放列表中去除。";
@@ -420,19 +459,19 @@ public class SettingPanel : BasePanel
     /// 播放模式切换
     /// </summary>
     /// <param name="value"></param>
-    private void OnModeChange(int value)
-    {
-        if (value == 1)
-        {
-            SwitchTimeCanvas.Open();
-        }
-        else if (value == 0)
-        {
-            SwitchTimeCanvas.Hide();
-        }
+    //private void OnModeChange(int value)
+    //{
+    //    if (value == 1)
+    //    {
+    //        SwitchTimeCanvas.Open();
+    //    }
+    //    else if (value == 0)
+    //    {
+    //        SwitchTimeCanvas.Hide();
+    //    }
 
-        videoData.PlayMode = Dropdown.value;
-    }
+    //    videoData.PlayMode = Dropdown.value;
+    //}
 
     private void Update()
     {
@@ -443,14 +482,9 @@ public class SettingPanel : BasePanel
             EventSystem.current.SetSelectedGameObject(PasswordInputField.gameObject);
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-
         }
     }
 
@@ -460,5 +494,26 @@ public class SettingPanel : BasePanel
     private void OnApplicationQuit()
     {
         Config.Instance.SaveData();
+    }
+
+    public void SetBtnAndTextScale()
+    {
+        Button[] btns = LeftScroll.content.GetComponentsInChildren<Button>();
+        if (btns.Length > 0)
+        {
+            for (int i = 0; i < btns.Length; i++)
+            {
+                btns[i].transform.localScale = Vector3.one;
+            }
+        }
+
+        Text[] texts = RightScroll.content.GetComponentsInChildren<Text>();
+        if(texts.Length > 0)
+        {
+            for (int i = 0; i < texts.Length; i++)
+            {
+                texts[i].transform.localScale = Vector3.one;
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ public class VideoData
     public int ScreenX;
     public int ScreenY;
 
-    public int PlayMode;
+    //public int PlayMode;
 
     public int SwitchTime;
 }
@@ -39,6 +39,8 @@ public class Config : MonoBehaviour
 
     private string File_name = "config.txt";
     private string Path;
+    public const string FileSuffix = ".ery";
+    public const string VideoFoldName = "MP4";
 
     public List<string> EncryptVideoPath = new List<string>();
 
@@ -54,9 +56,20 @@ public class Config : MonoBehaviour
             Debug.Log(st);
             configData = JsonConvert.DeserializeObject<ConfigData>(st);
         }
+        else
+        {
+            configData.isCursor = true;
+            configData.videoData = new VideoData();
+            configData.videoData.playVideoDic = new Dictionary<string, bool>();
+            configData.videoData.ScreenX = 1920;
+            configData.videoData.ScreenY = 1080;
+            configData.videoData.SwitchTime = 20;
+            SaveData();
+        }
 
-        FileHandle.Instance.IsExisFolder(Application.streamingAssetsPath + "/EncryptVideo");
-        EncryptVideoPath = FileHandle.Instance.GetVideoPath(Application.streamingAssetsPath + "/EncryptVideo");
+        FileHandle.Instance.IsExisFolder(Application.streamingAssetsPath + "/" + VideoFoldName);
+        //FileHandle.Instance.IsExisFolder(Application.streamingAssetsPath + "/CacheFolder");
+        EncryptVideoPath = FileHandle.Instance.GetVideoPath(Application.streamingAssetsPath + "/" + VideoFoldName);
 
 #elif UNITY_ANDROID || UNITY_IOS || UNITY_IPHONE
         Path = Application.persistentDataPath + "/" + File_name;
@@ -77,12 +90,12 @@ public class Config : MonoBehaviour
 #endif
     }
 
-    //    private void OnDestroy()
-    //    {
-    //#if UNITY_EDITOR
-    //        SaveData();
-    //#endif
-    //    }
+//    private void OnDestroy()
+//    {
+//#if UNITY_EDITOR
+//        SaveData();
+//#endif
+//    }
 
     private void Start()
     {

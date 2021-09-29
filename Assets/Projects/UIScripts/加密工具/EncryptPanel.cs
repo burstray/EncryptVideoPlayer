@@ -12,29 +12,14 @@ public class EncryptPanel : BasePanel
 {
     public Button StartBtn,ReturnBtn;
     public Text Msg;
-
-    private OpenFileName openFileName = new OpenFileName();
     public bool IsEncrypt;
 
     protected override void Start()
     {
         base.Start();
-        Init();
-    }
-
-    private void Init()
-    {
-        openFileName.structSize = Marshal.SizeOf(openFileName);
-        openFileName.filter = "mp4文件(*.mp4)\0*.mp4";
-        openFileName.file = new string(new char[256]);
-        openFileName.maxFile = openFileName.file.Length;
-        openFileName.fileTitle = new string(new char[64]);
-        openFileName.maxFileTitle = openFileName.fileTitle.Length;
-        openFileName.initialDir = Application.streamingAssetsPath.Replace('/', '\\'); //默认路径
-        openFileName.title = "窗口标题";
-        openFileName.flags = 0x00080000 | 0x00001000 | 0x00000800 | 0x00000008;
-
-        FileHandle.Instance.IsExisFolder(Application.streamingAssetsPath + "/EncryptVideo");
+        FileHandle.Instance.IsExisFolder(Application.streamingAssetsPath + "/" + Config.VideoFoldName);
+        //FileObject fileObject = FileManager.Read(Application.streamingAssetsPath + "/EncryptVideo/123.mt", MTFrame.MTFile.FileFormatType.mp4);
+        //Debug.Log(fileObject.Buffet.Length);
     }
 
     public override void InitFind()
@@ -64,6 +49,17 @@ public class EncryptPanel : BasePanel
         if(IsEncrypt)
             return;
 
+        OpenFileName openFileName = new OpenFileName();
+        openFileName.structSize = Marshal.SizeOf(openFileName);
+        openFileName.filter = "mp4文件(*.mp4)\0*.mp4";
+        openFileName.file = new string(new char[256]);
+        openFileName.maxFile = openFileName.file.Length;
+        openFileName.fileTitle = new string(new char[64]);
+        openFileName.maxFileTitle = openFileName.fileTitle.Length;
+        openFileName.initialDir = Application.streamingAssetsPath.Replace('/', '\\'); //默认路径
+        openFileName.title = "窗口标题";
+        openFileName.flags = 0x00080000 | 0x00001000 | 0x00000800 | 0x00000008;
+
         if (LocalDialog.GetSaveFileName(openFileName))
         {
             IsEncrypt = true;
@@ -76,12 +72,13 @@ public class EncryptPanel : BasePanel
 
             var fileName = Path.GetFileNameWithoutExtension(path);
 
-            Msg.text = "加密中......";
+            Msg.text = "视频加密中,请耐心等待......";
             await Task.Run(() =>
             {
                 var data = File.ReadAllBytes(path);
+                //FileManager.Write(Application.streamingAssetsPath + "/EncryptVideo/"+fileName+Config.FileSuffix,data,MTFrame.MTFile.FileFormatType.mp4,MTFrame.MTFile.EncryptModeType.None);
                 using (var myStream = new MyStream(
-                    Application.streamingAssetsPath + "/EncryptVideo/" + fileName + ".ery",
+                    Application.streamingAssetsPath + "/" + Config.VideoFoldName + "/" + fileName + Config.FileSuffix,
                     FileMode.Create))
                 {
                     myStream.Write(data, 0, data.Length);
@@ -89,6 +86,7 @@ public class EncryptPanel : BasePanel
             });
 
             Msg.text = "文件" + fileName + "加密成功！";
+            Msg.text = Msg.text + "\n" + "请在" + Application.streamingAssetsPath + "/" + Config.VideoFoldName + "下查看加密文件！";
             IsEncrypt = false;
         }
     }
@@ -111,8 +109,9 @@ public class EncryptPanel : BasePanel
                     for (int i = 0; i < vs.Count; i++)
                     {
                         var data = File.ReadAllBytes(vs[i]);
+                        //FileManager.Write(Application.streamingAssetsPath + "/EncryptVideo/"+Path.GetFileNameWithoutExtension(vs[i])+Config.FileSuffix,data,MTFrame.MTFile.FileFormatType.mp4,MTFrame.MTFile.EncryptModeType.None);
                         using (var myStream = new MyStream(
-                            Application.streamingAssetsPath + "/EncryptVideo/" + Path.GetFileNameWithoutExtension(vs[i]) + ".ery",
+                            Application.streamingAssetsPath + "/" + Config.VideoFoldName + "/" + Path.GetFileNameWithoutExtension(vs[i]) + Config.FileSuffix,
                             FileMode.Create))
                         {
                             myStream.Write(data, 0, data.Length);
@@ -120,7 +119,7 @@ public class EncryptPanel : BasePanel
                     }
                 });
 
-                Msg.text = "加密完成，请在" + Application.streamingAssetsPath + "/EncryptVideo下查看加密文件！";
+                Msg.text = "加密完成，请在" + Application.streamingAssetsPath + "/" + Config.VideoFoldName + "下查看加密文件！";
                 IsEncrypt = false;
             }
             else
